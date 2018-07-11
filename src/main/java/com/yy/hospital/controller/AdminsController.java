@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080",maxAge = 3600)
@@ -49,32 +52,7 @@ public class AdminsController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-/*
-    //修改密码
-    @Deprecated
-    @RequestMapping(value="/changepwd",method = RequestMethod.PUT)
-    public ResponseEntity<?> resetPasswrod(@RequestParam("pwd")String pwd,@RequestParam("password")String password,@RequestParam("password2")String password2,HttpSession session){
-        Admins admin = (Admins) session.getAttribute("user");
-        //先判断原始密码是否正确
-        if(!pwd.equals(admin.getPwd())){
-            return new ResponseEntity<CustomerErrorType>(new CustomerErrorType("原始密码输入错误！"),HttpStatus.OK);
-        }
 
-        //更新密码
-        String aname = admin.getAname();
-        adminsService.resetPassword(password,aname);
-        //根据新密码查询用户
-        admin = adminsService.login(aname,password);
-        if(admin == null){
-            //因为现在是redis存session了，改了密码后，要重新更新redis里面的user
-            session.setAttribute("user",admin);
-            return new ResponseEntity<CustomerErrorType>(new CustomerErrorType("密码重设不成功！"),HttpStatus.OK);
-        }else{
-            return new ResponseEntity<Admins>(admin,HttpStatus.OK);
-        }
-    }
-
-*/
 
     //修改密码
     @RequestMapping(value = "/changepwd",method = RequestMethod.POST)
@@ -82,7 +60,7 @@ public class AdminsController {
     public ResponseEntity<?> resetPasswrod(HttpServletRequest request,@RequestParam("password")String password,@RequestParam("password2")String password2){
 
         String authToken = request.getHeader(tokenHeader);
-        final String token = authToken.substring(7);
+        /*final*/ String token = authToken.substring(7);
         password = passwordEncoder.encode(password);
         String username = jwtTokenUtil.getUsernameFromToken(token);
 
@@ -102,10 +80,23 @@ public class AdminsController {
 
 
 
+    @RequestMapping(value = "/admins/{state}",method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> findByState(@PathVariable("state")Integer state){
+        List<Admins> list=adminsService.findByState(state);
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
 
-
-
-
+    @RequestMapping(value = "/admins",method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> addAdmins(@RequestBody Admins admins){
+        admins.setState(1);
+        admins.setPwd(passwordEncoder.encode(admins.getPwd()));
+        int result=adminsService.addGeneralAdmins(admins);
+        Map<String,Object> map=new HashMap<>();
+        map.put("result",result);
+        return new ResponseEntity<>(map,HttpStatus.OK);
+    }
 
 
 

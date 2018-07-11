@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 获取已授权用户信息
+ * 获取已授权用户信息，相当于上个版本的userseesion方法
  */
 @RestController
 @RequestMapping("/api")

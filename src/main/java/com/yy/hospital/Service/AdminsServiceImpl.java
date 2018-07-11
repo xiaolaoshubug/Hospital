@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("adminsService")
 @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
@@ -31,6 +32,22 @@ public class AdminsServiceImpl implements AdminsService {
     @Override
     public void resetPassword(String pwd, String aname) {
         adminsMapper.updatePwd(pwd,aname);
+    }
+
+    @Override
+    public List<Admins> findByState(Integer state) {
+        return adminsMapper.findByState(state);
+    }
+
+    //添加普通管理员
+    @Override
+    public int addGeneralAdmins(Admins admins) {
+        //添加普通管理员
+        int i=adminsMapper.insertAdmins(admins);
+        if(i>0){
+            adminsMapper.insertAdminsAuthority(1);
+        }
+        return i;
     }
 
 

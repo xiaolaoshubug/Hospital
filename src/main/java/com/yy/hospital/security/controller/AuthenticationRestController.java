@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 授权控制器
- *
+ * 用户登录控制器
  *
  */
 @RestController
@@ -35,6 +35,8 @@ public class AuthenticationRestController {
   @Value("${jwt.header}")
   private String tokenHeader;
 
+
+  //WebSecurityConfig类里面定义的，用来校验用户名和密码的
   @Autowired
   private AuthenticationManager authenticationManager;
 
@@ -52,16 +54,18 @@ public class AuthenticationRestController {
    * @return
    * @throws AuthenticationException
    */
-  @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+  @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)  //用户登录的用户名和密码已经封装到JwtAuthenticationRequest里面了
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
-    //教案用户名和密码
+    //校验用户名和密码（授权管理器里面的方法，不是自己写的）
     authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
     // Reload password post-security so we can generate the token
+    //按用户名查用户
     final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+    //然后传入用户生成token
     final String token = jwtTokenUtil.generateToken(userDetails);
-
+    //把token封装到JwtAuthenticationResponse里面返回
     // Return the token
     return ResponseEntity.ok(new JwtAuthenticationResponse(token));
   }

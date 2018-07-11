@@ -2,11 +2,13 @@ package com.yy.hospital.mapper;
 
 import com.yy.hospital.domain.Admins;
 import com.yy.hospital.domain.Doctors;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.Date;
+import java.util.List;
 
 
 //启动类上加了MapperScan，就不用加@Repository
@@ -30,6 +32,15 @@ public interface AdminsMapper {
 
     Admins findByName(@Param("aname")String aname);
 
+    @Select("select aid,aname,aexist,by1 from admins " +
+            "where state=#{state}")
+    List<Admins> findByState(@Param("state") Integer state);
 
+    @Insert("insert into admins (aname,pwd,state,by1) values" +
+            " (#{aname},#{pwd},#{state},#{by1})")
+    int insertAdmins(Admins admins);
+
+    @Insert("insert into user_authority values(@@Identity,#{authority_id})")
+    int insertAdminsAuthority(@Param("authority_id")Integer authority_id);
 
 }
