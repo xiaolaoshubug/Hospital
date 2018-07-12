@@ -34,6 +34,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedHeader("*");          //不对head做限制
         //corsConfiguration.setAllowCredentials(true);      //允许跨域访问(在响应报文里带上跨域请求的凭证，和浏览器请求里面xhrFields相匹配，前后端才能正常通信)
         corsConfiguration.addAllowedOrigin("*");          //允许任何来源的跨域访问
+
         source.registerCorsConfiguration("/**",corsConfiguration);   //指定对当前这个服务下的所有请求都启用corsConfiguration的配置
         return new CorsFilter(source);
     }

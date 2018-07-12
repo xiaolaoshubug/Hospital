@@ -19,12 +19,15 @@ public class MethodProtectedRestController {
    * in @PreAuthorize such as 'hasRole()' to determine if a user has access. Remember that the hasRole expression assumes a
    * 'ROLE_' prefix on all role names. So 'ADMIN' here is actually stored as 'ROLE_ADMIN' in database!
    **/
+
+  //只有角色是ADMIN的才能请求/protectedadmin
   @RequestMapping(value = "/protectedadmin", method = RequestMethod.GET)
   @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<?> getProtectedAdmin() {
     return ResponseEntity.ok("Greetings from admin protected method!");
   }
 
+  //只有角色是USER的才能请求/protectedadmin
   @RequestMapping(value = "/protecteduser", method = RequestMethod.GET)
   @PreAuthorize("hasRole('USER')")
   public ResponseEntity<?> getProtectedUser() {

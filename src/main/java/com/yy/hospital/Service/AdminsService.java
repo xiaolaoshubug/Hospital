@@ -16,9 +16,13 @@ public interface AdminsService {
     //更新密码
     void resetPassword(String pwd,String aname);
 
+    //查找管理员
     List<Admins> findByState(Integer state);
 
     //增加一个普通管理员
     int addGeneralAdmins(Admins admins);
+
+    //更改用户的状态
+    int updateUserAexist(Integer aid,Integer aexist);
 
 }

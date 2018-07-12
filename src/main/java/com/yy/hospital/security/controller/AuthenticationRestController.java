@@ -36,7 +36,7 @@ public class AuthenticationRestController {
   private String tokenHeader;
 
 
-  //WebSecurityConfig类里面定义的，用来校验用户名和密码的
+  //WebSecurityConfig类里面配置的，用来校验用户名和密码的
   @Autowired
   private AuthenticationManager authenticationManager;
 
@@ -57,13 +57,14 @@ public class AuthenticationRestController {
   @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)  //用户登录的用户名和密码已经封装到JwtAuthenticationRequest里面了
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
-    //校验用户名和密码（授权管理器里面的方法，不是自己写的）
+    //authenticate校验用户名和密码（本类下面）
     authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
+    //校验通过后
     // Reload password post-security so we can generate the token
     //按用户名查用户
     final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-    //然后传入用户生成token
+    //然后传入用户生成令牌token
     final String token = jwtTokenUtil.generateToken(userDetails);
     //把token封装到JwtAuthenticationResponse里面返回
     // Return the token

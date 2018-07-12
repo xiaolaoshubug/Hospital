@@ -50,5 +50,10 @@ public class AdminsServiceImpl implements AdminsService {
         return i;
     }
 
+    @Override
+    public int updateUserAexist(Integer aid, Integer aexist) {
+        return adminsMapper.updateUserAexist(aid,aexist);
+    }
+
 
 }

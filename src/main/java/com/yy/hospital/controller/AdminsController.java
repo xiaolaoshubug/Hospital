@@ -18,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpRequestResponseHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +55,7 @@ public class AdminsController {
     private PasswordEncoder passwordEncoder;
 
 
-    //修改密码
+    //页面右上角:修改密码
     @RequestMapping(value = "/changepwd",method = RequestMethod.POST)
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> resetPasswrod(HttpServletRequest request,@RequestParam("password")String password,@RequestParam("password2")String password2){
@@ -76,10 +77,7 @@ public class AdminsController {
     }
 
 
-
-
-
-
+    //账户管理--管理员列表:展现普通管理员
     @RequestMapping(value = "/admins/{state}",method = RequestMethod.GET)
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findByState(@PathVariable("state")Integer state){
@@ -99,7 +97,16 @@ public class AdminsController {
     }
 
 
-
-
+    //账户管理--管理员列表:启用停用普通管理员
+    @RequestMapping(value = "/adminschangestate",method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> adminschangestate(@RequestParam("aid")Integer aid,@RequestParam("aexist")Integer aexist){
+        int reuslt = adminsService.updateUserAexist(aid,aexist);
+        if(reuslt == 1){
+            return new ResponseEntity<String>("ok",HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("失败", HttpStatus.OK);
+        }
+    }
 
 }

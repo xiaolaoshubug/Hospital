@@ -26,8 +26,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Web 安全配置类
  *
  */
-@Configuration
-@EnableWebSecurity
+@Configuration    //这是配置类
+@EnableWebSecurity    //允许webSecurity进行检查
 @EnableGlobalMethodSecurity(prePostEnabled = true)  //对全局的所有方法都要做安全检查类
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
   @Autowired
+  //配置一个全局的授权管理器
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     auth
         .userDetailsService(jwtUserDetailsService)
@@ -86,13 +87,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         .authorizeRequests()
 
-        .antMatchers("/api/auth/**").permitAll()
-        .anyRequest().authenticated();
+        .antMatchers("/api/auth/**").permitAll()   //未授权的情况下都能访问的路径
+        .anyRequest().authenticated();   //其他的request都需要校验
 
     // Custom JWT based security filter
     //创建过滤器，过滤jwt请求
     JwtAuthenticationTokenFilter authenticationTokenFilter=new JwtAuthenticationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader);
-    httpSecurity
+    httpSecurity    //把过滤器添加到安全策略里面去
         .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
     // disable page caching

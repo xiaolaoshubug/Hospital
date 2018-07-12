@@ -1,7 +1,10 @@
 package com.yy.hospital.mapper;
 
 import com.yy.hospital.domain.Departs;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
@@ -15,4 +18,17 @@ public interface DepartsMapper {
     //查询所有的科室信息
     @Select("select deid,dename,intro,deexist from departs")
     List<Departs> findAll();
+
+
+    //添加科室
+    @Insert("insert into departs (dename,intro,deexist) values (#{dename},#{intro},#{deexist}) ")
+    int insertDeparts(@Param("dename")String dename,@Param("intro")String intro,@Param("deexist")Integer deexist);
+
+    //更新科室
+    @Update("update departs set dename=#{dename},intro=#{intro},deexist=#{deexist} where deid=#{deid}")
+    int updateDeparts(@Param("dename")String dename,@Param("intro")String intro,@Param("deexist")Integer deexist,@Param("deid")Integer deid);
+
+    //更改科室deexist
+    @Update("update departs set deexist=#{deexist} where deid=#{deid}")
+    int updateDeexist(@Param("deid")Integer deid,@Param("deexist")Integer deexist);
 }

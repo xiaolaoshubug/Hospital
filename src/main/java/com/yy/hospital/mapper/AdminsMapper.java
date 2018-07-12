@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.security.core.parameters.P;
 
 import java.util.Date;
 import java.util.List;
@@ -32,15 +33,23 @@ public interface AdminsMapper {
 
     Admins findByName(@Param("aname")String aname);
 
+    //根据权限等级来查找用户
     @Select("select aid,aname,aexist,by1 from admins " +
             "where state=#{state}")
     List<Admins> findByState(@Param("state") Integer state);
 
+    //插入admin（因为state默认值为1，所以就没设置state了）
     @Insert("insert into admins (aname,pwd,state,by1) values" +
             " (#{aname},#{pwd},#{state},#{by1})")
     int insertAdmins(Admins admins);
 
+    //插入用户权限关联表
     @Insert("insert into user_authority values(@@Identity,#{authority_id})")
     int insertAdminsAuthority(@Param("authority_id")Integer authority_id);
+
+    //根据用户id来更新用户状态（0为停用）
+    @Update("update admins set aexist = #{aexist} where aid = #{aid}")
+    int updateUserAexist(@Param("aid")Integer aid , @Param("aexist")Integer aexist);
+
 
 }
