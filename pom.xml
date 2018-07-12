@@ -48,19 +48,17 @@
 			<version>6.0.6</version>
 		</dependency>
 
-<!--
-		&lt;!&ndash;session+redis&ndash;&gt;&lt;!&ndash;这个包要与springboot保持一致&ndash;&gt;
-		<dependency>
+		<!--session+redis--><!--这个包要与springboot保持一致-->
+<!--		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-data-redis</artifactId>
-		</dependency>
+		</dependency>-->
 
-		&lt;!&ndash;应用环境基本配置&ndash;&gt;
+		<!--应用环境基本配置-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
--->
         <!--security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

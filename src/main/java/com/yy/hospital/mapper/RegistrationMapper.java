@@ -1,10 +1,12 @@
 package com.yy.hospital.mapper;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
 
+@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
 public interface RegistrationMapper  {
 
 

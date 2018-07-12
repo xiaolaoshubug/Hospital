@@ -1,6 +1,8 @@
 package com.yy.hospital.domain;
 
-public class Authority {
+import java.io.Serializable;
+
+public class Authority implements Serializable{
 
     private Integer id;
     private AuthorityName name;  //角色名是必须限定好的枚举

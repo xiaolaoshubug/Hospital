@@ -2,10 +2,7 @@ package com.yy.hospital.mapper;
 
 import com.yy.hospital.domain.Admins;
 import com.yy.hospital.domain.Doctors;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.security.core.parameters.P;
 
 import java.util.Date;
@@ -13,6 +10,7 @@ import java.util.List;
 
 
 //启动类上加了MapperScan，就不用加@Repository
+@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
 public interface AdminsMapper {
 
 

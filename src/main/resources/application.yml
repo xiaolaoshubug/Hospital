@@ -11,6 +11,15 @@ spring:
   jackson:
     serialization:
       indent_output: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
 
 mybatis:
   type-aliases-package: com.yy.hospital.domain
@@ -22,6 +31,7 @@ logging:
   level:
     org.springframework.security: info
     com.yy.hospital.mapper: debug
+    com.yy.hospital.util: debug
   file: logs/all.log   # 定义日志文件路径（相对路径）本来是不用写的，但是log4j.properties里面的文件输出有问题
 
 jwt:
