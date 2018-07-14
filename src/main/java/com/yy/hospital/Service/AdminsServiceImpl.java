@@ -55,5 +55,11 @@ public class AdminsServiceImpl implements AdminsService {
         return adminsMapper.updateUserAexist(aid,aexist);
     }
 
+    //插入一个医生用户
+    @Override
+    public int insertAdminsReDoid(String aname, String pwd) {
+        return adminsMapper.insertAdminsReDoid(aname,pwd);
+    }
+
 
 }

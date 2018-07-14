@@ -25,4 +25,7 @@ public interface AdminsService {
     //更改用户的状态
     int updateUserAexist(Integer aid,Integer aexist);
 
+    //插入一个医生用户
+    int insertAdminsReDoid(String aname,String pwd);
+
 }

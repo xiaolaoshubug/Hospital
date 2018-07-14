@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
 
-@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
+/*@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)*/
 public interface RegistrationMapper  {
 
 

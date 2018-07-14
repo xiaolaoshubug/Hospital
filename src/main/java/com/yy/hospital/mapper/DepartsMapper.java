@@ -6,7 +6,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
 
-@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
+/*@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)*/
 public interface DepartsMapper {
 
     //查询所有没被禁用的科室信息

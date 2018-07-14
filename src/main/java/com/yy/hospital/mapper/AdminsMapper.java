@@ -10,7 +10,7 @@ import java.util.List;
 
 
 //启动类上加了MapperScan，就不用加@Repository
-@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
+/*@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)*/
 public interface AdminsMapper {
 
 
@@ -27,9 +27,6 @@ public interface AdminsMapper {
     @Update("update admins set login_time=#{loginTime} where aid=#{aid}")
     void updateLoginTime(@Param("loginTime")Date loginTime,@Param("aid")int aid);
 
-
-
-    Admins findByName(@Param("aname")String aname);
 
     //根据权限等级来查找用户
     @Select("select aid,aname,aexist,by1 from admins " +
@@ -49,5 +46,12 @@ public interface AdminsMapper {
     @Update("update admins set aexist = #{aexist} where aid = #{aid}")
     int updateUserAexist(@Param("aid")Integer aid , @Param("aexist")Integer aexist);
 
+
+   //插入一个医生用户
+    @Insert("insert into admins (aname,pwd,state,aexist,doid) values(#{aname},#{pwd},2,1,@@Identity)")
+    int insertAdminsReDoid(@Param("aname")String aname,@Param("pwd")String pwd);
+
+
+    Admins findByName(@Param("aname")String aname);
 
 }

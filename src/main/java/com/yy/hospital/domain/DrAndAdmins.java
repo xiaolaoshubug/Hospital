@@ -1,12 +1,17 @@
 package com.yy.hospital.domain;
 
-public class Doctors {
-    private Integer doid;
+public class DrAndAdmins {
+
     private String doname;
+    private String aname;
+    private String pwd;
+    private Integer bcost;
+    private Integer pcreg;
+    private Integer xcreg;
     private String title;
-    private String photo;
+    private String dename;
+    private Integer deid;
     private String info;
-//    private Integer deid;
     private Integer monam;
     private Integer monpam;
     private Integer tueam;
@@ -21,40 +26,13 @@ public class Doctors {
     private Integer satpm;
     private Integer sunam;
     private Integer sumpm;
-    private Integer pcreg;
-    private Integer xcreg;
-    private Integer doexist;
-    private Integer bcost;
-    private Integer by1;
-    private Integer by2;
 
-    private Departs departs;
-    private String aname;
-
-
-    public String getAname() {
-        return aname;
+    public Integer getDeid() {
+        return deid;
     }
 
-    public void setAname(String aname) {
-        this.aname = aname;
-    }
-
-    public Departs getDeparts() {
-        return departs;
-    }
-
-    public void setDeparts(Departs departs) {
-        this.departs = departs;
-    }
-
-
-    public Integer getDoid() {
-        return doid;
-    }
-
-    public void setDoid(Integer doid) {
-        this.doid = doid;
+    public void setDeid(Integer deid) {
+        this.deid = deid;
     }
 
     public String getDoname() {
@@ -65,6 +43,46 @@ public class Doctors {
         this.doname = doname;
     }
 
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public Integer getBcost() {
+        return bcost;
+    }
+
+    public void setBcost(Integer bcost) {
+        this.bcost = bcost;
+    }
+
+    public Integer getPcreg() {
+        return pcreg;
+    }
+
+    public void setPcreg(Integer pcreg) {
+        this.pcreg = pcreg;
+    }
+
+    public Integer getXcreg() {
+        return xcreg;
+    }
+
+    public void setXcreg(Integer xcreg) {
+        this.xcreg = xcreg;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -73,12 +91,12 @@ public class Doctors {
         this.title = title;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getDename() {
+        return dename;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setDename(String dename) {
+        this.dename = dename;
     }
 
     public String getInfo() {
@@ -88,8 +106,6 @@ public class Doctors {
     public void setInfo(String info) {
         this.info = info;
     }
-
-
 
     public Integer getMonam() {
         return monam;
@@ -195,59 +211,11 @@ public class Doctors {
         this.sunam = sunam;
     }
 
-    public Integer getSunpm() {
+    public Integer getSumpm() {
         return sumpm;
     }
 
-    public void setSunpm(Integer sumpm) {
+    public void setSumpm(Integer sumpm) {
         this.sumpm = sumpm;
-    }
-
-    public Integer getPcreg() {
-        return pcreg;
-    }
-
-    public void setPcreg(Integer pcreg) {
-        this.pcreg = pcreg;
-    }
-
-    public Integer getXcreg() {
-        return xcreg;
-    }
-
-    public void setXcreg(Integer xcreg) {
-        this.xcreg = xcreg;
-    }
-
-    public Integer getDoexist() {
-        return doexist;
-    }
-
-    public void setDoexist(Integer doexist) {
-        this.doexist = doexist;
-    }
-
-    public Integer getBcost() {
-        return bcost;
-    }
-
-    public void setBcost(Integer bcost) {
-        this.bcost = bcost;
-    }
-
-    public Integer getBy1() {
-        return by1;
-    }
-
-    public void setBy1(Integer by1) {
-        this.by1 = by1;
-    }
-
-    public Integer getBy2() {
-        return by2;
-    }
-
-    public void setBy2(Integer by2) {
-        this.by2 = by2;
     }
 }

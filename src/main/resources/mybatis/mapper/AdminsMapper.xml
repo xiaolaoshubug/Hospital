@@ -5,7 +5,7 @@
 
 <mapper namespace="com.yy.hospital.mapper.AdminsMapper">
 
-   <!-- <cache type="com.yy.hospital.util.RedisCache"/>-->
+    <!--<cache type="com.yy.hospital.util.RedisCache"/>-->
 
     <resultMap id="admins-result" type="com.yy.hospital.domain.Admins">
         <id property="aid" column="aid" />
