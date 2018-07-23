@@ -13,7 +13,7 @@ public class DrAndAdmins {
     private Integer deid;
     private String info;
     private Integer monam;
-    private Integer monpam;
+    private Integer monpm;
     private Integer tueam;
     private Integer tuepm;
     private Integer wedam;
@@ -115,12 +115,12 @@ public class DrAndAdmins {
         this.monam = monam;
     }
 
-    public Integer getMonpam() {
-        return monpam;
+    public Integer getMonpm() {
+        return monpm;
     }
 
-    public void setMonpam(Integer monpam) {
-        this.monpam = monpam;
+    public void setMonpm(Integer monpm) {
+        this.monpm = monpm;
     }
 
     public Integer getTueam() {

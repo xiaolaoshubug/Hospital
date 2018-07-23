@@ -1,6 +1,7 @@
 package com.yy.hospital.Service;
 
 import com.yy.hospital.domain.Doctors;
+import com.yy.hospital.domain.DrAndAdmins;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
@@ -28,5 +29,9 @@ public interface DoctorsService {
                  Integer satam, Integer satpm,
                  Integer sumam, Integer sumpm);
 
+    //找到一个医生和用户信息
+    DrAndAdmins findOneDrAndPt(Integer doid);
 
+    //根据id更改医生信息
+    int updateDrById(Doctors doctors);
 }

@@ -6,7 +6,7 @@ public class Doctors {
     private String title;
     private String photo;
     private String info;
-//    private Integer deid;
+    private Integer deid;
     private Integer monam;
     private Integer monpam;
     private Integer tueam;
@@ -31,6 +31,21 @@ public class Doctors {
     private Departs departs;
     private String aname;
 
+    public Integer getDeid() {
+        return deid;
+    }
+
+    public void setDeid(Integer deid) {
+        this.deid = deid;
+    }
+
+    public Integer getSumpm() {
+        return sumpm;
+    }
+
+    public void setSumpm(Integer sumpm) {
+        this.sumpm = sumpm;
+    }
 
     public String getAname() {
         return aname;

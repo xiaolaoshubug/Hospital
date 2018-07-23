@@ -18,11 +18,9 @@
         <result property="info" column="INFO"/>
         <result property="doexist" column="DOEXIST"/>
         <result property="aname" column="ANAME"/>
-
         <collection property="departs" ofType="com.yy.hospital.domain.Departs">
             <id property="dename" column="DENAME" />
         </collection>
-
     </resultMap>
 
     <select id="findAllDr" resultMap="doctors-result">
@@ -30,10 +28,10 @@
        from admins a JOIN doctors d on a.doid = d.doid
        JOIN  departs de  on de.deid = d.deid
     </select>
-    
-    
-    
-    
+
+
+
+    <!--插入一个医生-->
     <resultMap id="doctors-result01" type="com.yy.hospital.domain.Doctors">
         <id property="doid" column="DOID" />
         <result property="doname" column="DONAME"/>
@@ -44,7 +42,6 @@
         <result property="xcreg" column="XCREG"/>
         <result property="info" column="INFO"/>
         <result property="doexist" column="DOEXIST"/>
-
         <result property="monam" column="monam"/>
         <result property="tueam" column="tueam"/>
         <result property="wedam" column="wedam"/>
@@ -61,8 +58,7 @@
         <result property="sumpm" column="sumpm"/>
     </resultMap>
 
-
-    <insert id="insertDr">
+    <insert id="insertDr" >
         insert into doctors (doname,title,bcost,pcreg,xcreg,info,doexist,deid,
                                monam,tueam,wedam,thuam,friam,satam,sunam,
                                monpm,tuepm,wedpm,thupm,fripm,satpm,sumpm)
@@ -70,5 +66,41 @@
                  #{monam},#{tueam},#{wedam},#{thuam},#{friam},#{satam},#{sunam},
                  #{monpm},#{tuepm},#{wedpm},#{thupm},#{fripm},#{satpm},#{sumpm})
     </insert>
+
+
+    <!--得到一个医生和用户两张表的信息-->
+    <resultMap id="doctors-result02" type="com.yy.hospital.domain.DrAndAdmins">
+        <id property="doname" column="DONAME"></id>
+        <result property="title" column="TITLE"/>
+        <result property="dename" column="DENAME"/>
+        <result property="bcost" column="BCOST"/>
+        <result property="pcreg" column="PCREG"/>
+        <result property="xcreg" column="XCREG"/>
+        <result property="info" column="INFO"/>
+        <result property="doexist" column="DOEXIST"/>
+        <result property="monam" column="monam"/>
+        <result property="tueam" column="tueam"/>
+        <result property="wedam" column="wedam"/>
+        <result property="thuam" column="thuam"/>
+        <result property="friam" column="friam"/>
+        <result property="satam" column="satam"/>
+        <result property="sunam" column="sunam"/>
+        <result property="monpm" column="monpm"/>
+        <result property="tuepm" column="tuepm"/>
+        <result property="wedpm" column="wedpm"/>
+        <result property="thupm" column="thupm"/>
+        <result property="fripm" column="fripm"/>
+        <result property="satpm" column="satpm"/>
+        <result property="sumpm" column="sumpm"/>
+    </resultMap>
+    
+    <select id="findOneDrAndPt" resultMap="doctors-result02" >
+        select d.doname doname,d.bcost bcost,d.pcreg pcreg,d.xcreg xcreg,
+                d.title title ,de.dename dename,d.info info,
+                d.monam monam,d.tueam tueam,d.wedam wedam,d.thuam thuam,d.friam friam,d.satam satam,d.sunam sunam,
+                d.monpm monpm,d.tuepm tuepm,d.wedpm wedpm,d.thupm thupm,d.fripm fripm,d.satpm satpm,d.sumpm sumpm
+                from doctors d JOIN  departs de on d.deid = de.deid
+                where d.doid = #{doid}
+    </select>
 
 </mapper>

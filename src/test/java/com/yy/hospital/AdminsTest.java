@@ -80,6 +80,7 @@ public class AdminsTest {
     public void test4(){
         /*int flag = adminsMapper.insertAdmins("插入姓名","插入密码");*/
        /* System.out.println(flag);*/
+        System.out.println(passwordEncoder.encode("admin"));
     }
 
 
