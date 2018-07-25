@@ -33,17 +33,18 @@ public class BookableController {
         WeekBookable weekBookable = new WeekBookable();
         Map<String,List<Bookable>> map = new HashMap<>();
         List<Bookable> bookableList = new ArrayList<>();
-        //从bookable中获取列表信息
-        bookableList = bookableService.findBookableByBdateAdDoid(bdate,deid);
-        System.out.println(bookableList.size());
 
-        //把统计信息导入到WeekBean类中
+        // 1.从bookable中获取列表信息
+        bookableList = bookableService.findBookableByBdateAdDoid(bdate,deid);
+
+
+        // 2.把统计信息导入到WeekBean类中
         LinkedHashSet<Integer> set = new LinkedHashSet<Integer>();
-        //看有多少个医生，把每个医生的doid存入set中
+        // 看有多少个医生，把每个医生的doid存入set中(因为bookableList中一个医生有多条数据，所以为了不重复用set)
         for(int i=0;i<bookableList.size();i++){
             set.add(bookableList.get(i).getDoid());
         }
-        //有少个医生，建多少个weekBean,并setDoid
+        // 有少个医生，建多少个weekBean,并setDoid
         WeekBean[] weekBeanArrays = new WeekBean[set.size()];
         Iterator it = set.iterator();
         int n = 0;
@@ -51,18 +52,21 @@ public class BookableController {
             weekBeanArrays[n] = new WeekBean();
             weekBeanArrays[n].setDoid((Integer) it.next());
             n++;
-
         }
         n=0;
+
+        // weekBean中setDoname和setAreg
+        // setDoname
         weekBeanArrays[n].setDoname(doctorsMapper.findByDoid(bookableList.get(0).getDoid()).getDoname());
         for(int j=0;j<bookableList.size();j++){
+            // 因为一个weekBean对应多个bookableList,所以当bookableList中的doid变了，weekBean才跟着变
             if(!weekBeanArrays[n].getDoid().equals(bookableList.get(j).getDoid())){
                 n++;
                 weekBeanArrays[n].setDoname(doctorsMapper.findByDoid(bookableList.get(j).getDoid()).getDoname());
             }
 
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E");
             String e = simpleDateFormat.format(bookableList.get(j).getBdate());
             System.out.println(e);
             if(e.equals("星期一")){
@@ -111,7 +115,7 @@ public class BookableController {
             }
 
         }
-        //把weekBean数组的对象放但weeBean列表中
+        //把weekBean数组的对象放但weeBean列表中(因为返回的参数是WeekBookable，WeekBookable里面的属性都是list)
         List<WeekBean> weekBeanList = new ArrayList<>();
         for(int h=0 ; h<weekBeanArrays.length;h++){
             weekBeanList.add(weekBeanArrays[h]);
@@ -120,7 +124,7 @@ public class BookableController {
 
 
 
-        //星期列表
+        // 3.星期列表
         List<String> weekList = new ArrayList<>();
         weekList.add("星期一");
         weekList.add("星期二");
@@ -129,6 +133,9 @@ public class BookableController {
         weekList.add("星期五");
         weekList.add("星期六");
         weekList.add("星期日");
+
+
+        // 4 .将weekList和weekBeanList装入weekBookable(result)
         weekBookable.setWeekList(weekList);
         weekBookable.setWeekBeanList(weekBeanList);
 
@@ -137,4 +144,30 @@ public class BookableController {
         return new ResponseEntity<WeekBookable>(weekBookable,HttpStatus.OK);
     }
 
+
+    // 查询本星期是否排班
+    @RequestMapping(value = "/bookablealldoctor" , method = RequestMethod.POST)
+    public ResponseEntity<?> autoBK(@RequestParam("datetime")Date bdate , @RequestParam("deid")Integer deid){
+        int result = 0;
+        if(bookableService.findBookableByBdateAdDoid(bdate,deid).size()>0){
+            result = 1;
+        }
+        Map<String,Integer> map = new HashMap<>();
+        map.put("result",result);
+        return new ResponseEntity<Map<String,Integer>>(map,HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/bookableadd" , method = RequestMethod.POST)
+    public ResponseEntity<?> autoBK02(@RequestParam("datetime")Date bdate , @RequestParam("deid")Integer deid){
+        //先拿到上一个星期的排班信息
+        List<Bookable> list = bookableService.findLastBookable(bdate , deid);
+        //插入到新的排班表
+        for(int n = 0 ; n< list.size() ; n++){
+            //used的默认值应该为0
+            int result = bookableService.insertNewBookable(list.get(n).getDoid(),list.get(n).getBdate(),list.get(n).getStarttime(),
+                                                0,list.get(n).getBnum(),list.get(n).getXcum());
+
+        }
+        return  new ResponseEntity<String>("ok" , HttpStatus.OK);
+    }
 }

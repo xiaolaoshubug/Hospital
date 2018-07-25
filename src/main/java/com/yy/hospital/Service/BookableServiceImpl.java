@@ -18,4 +18,14 @@ public class BookableServiceImpl implements BookableService{
     public List<Bookable> findBookableByBdateAdDoid(Date bdate, Integer deid) {
         return bookableMapper.findBookableByBdateAdDoid(bdate , deid);
     }
+
+    @Override
+    public List<Bookable> findLastBookable(Date bdate, Integer deid) {
+        return bookableMapper.findLastBookable(bdate , deid);
+    }
+
+    @Override
+    public int insertNewBookable(Integer doid, Date bdate, Integer starttime, Integer used, Integer bnum, Integer xcum) {
+        return bookableMapper.insertNewBookable(doid,bdate,starttime,used,bnum,xcum);
+    }
 }

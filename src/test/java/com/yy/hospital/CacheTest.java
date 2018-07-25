@@ -1,9 +1,11 @@
 package com.yy.hospital;
 
 import com.yy.hospital.domain.Admins;
+import com.yy.hospital.domain.Bookable;
 import com.yy.hospital.domain.Departs;
 import com.yy.hospital.domain.Doctors;
 import com.yy.hospital.mapper.AdminsMapper;
+import com.yy.hospital.mapper.BookableMapper;
 import com.yy.hospital.mapper.DepartsMapper;
 import com.yy.hospital.mapper.DoctorsMapper;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +28,8 @@ public class CacheTest {
     private AdminsMapper adminsMapper;
     @Autowired
     private DoctorsMapper doctorsMapper;
+    @Autowired
+    private BookableMapper bookableMapper;
 
 /*    @Test
     public void test1(){
@@ -48,7 +53,8 @@ public class CacheTest {
         System.out.println("第一次查");
         List<Admins> list2 = adminsMapper.findByState(1);
         System.out.println("第二次查");*/
-
-
+        Date date = new Date(System.currentTimeMillis());
+    //               bookableMapper.insertNewBookable(55,date,5,5,5,5);
+        System.out.println(bookableMapper.findLastBookable(date,1).size()+"yyyyyyyyyyyyyyyyyyyyyyyyy");
     }
 }

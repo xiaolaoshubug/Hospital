@@ -8,4 +8,9 @@ import java.util.List;
 
 public interface BookableService {
     List<Bookable> findBookableByBdateAdDoid(Date bdate , Integer deid);
+
+    List<Bookable> findLastBookable(Date bdate , Integer deid);
+
+    int insertNewBookable(Integer doid,Date bdate,Integer starttime,
+                          Integer used,Integer bnum,Integer xcum);
 }
