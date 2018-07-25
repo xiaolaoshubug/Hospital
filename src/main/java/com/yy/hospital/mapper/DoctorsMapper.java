@@ -1,16 +1,19 @@
 package com.yy.hospital.mapper;
 
+
 import com.yy.hospital.domain.Doctors;
 import com.yy.hospital.domain.DrAndAdmins;
+import com.yy.hospital.domain.WeekBean;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.security.core.parameters.P;
 
+import java.sql.Date;
 import java.util.List;
 
-@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)
+/*@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)*/
 public interface DoctorsMapper {
     @Select("select * from doctors where doid=#{doid}")
     Doctors findByDoid(@Param("doid")int doid);
@@ -53,4 +56,13 @@ public interface DoctorsMapper {
                      @Param("satam")Integer satam,@Param("satpm")Integer satpm,
                      @Param("sunam")Integer sumam,@Param("sumpm")Integer sumpm,
                      @Param("doid")Integer doid);
+
+
+
+
+
+
+
 }
+
+

@@ -3,7 +3,9 @@ package com.yy.hospital.controller;
 import com.yy.hospital.Service.DepartsService;
 import com.yy.hospital.domain.Departs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +60,12 @@ public class DepartsController {
         result = departsService.updateDeexist(deid,deexist);
         map.put("result",result);
         return new ResponseEntity<Map<String,Integer>>(map,HttpStatus.OK);
+    }
+
+    //可用科室
+    @RequestMapping(value = "departsdeexist" , method = RequestMethod.GET)
+    public ResponseEntity<List<Departs>> findList(){
+        List<Departs> list = departsService.findList();
+        return new ResponseEntity<List<Departs>>(list , HttpStatus.OK);
     }
 }

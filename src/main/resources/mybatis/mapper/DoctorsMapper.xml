@@ -103,4 +103,39 @@
                 where d.doid = #{doid}
     </select>
 
+
+
+    <resultMap id="doctors-result03" type="com.yy.hospital.domain.WeekBean">
+        <id property="doid" column="doid"/>
+        <result property="doname" column="doname"/>
+        <result property="areg1" column="monam"/>
+        <result property="areg2" column="tueam"/>
+        <result property="areg3" column="wedam"/>
+        <result property="areg4" column="thuam"/>
+        <result property="areg5" column="friam"/>
+        <result property="areg6" column="satam"/>
+        <result property="areg7" column="sunam"/>
+        <result property="preg1" column="monpm"/>
+        <result property="preg2" column="tuepm"/>
+        <result property="preg3" column="wedpm"/>
+        <result property="preg4" column="thupm"/>
+        <result property="preg5" column="fripm"/>
+        <result property="preg6" column="satpm"/>
+        <result property="preg7" column="sumpm"/>
+    </resultMap>
+    
+<!--    <select id="bookabledepartdoctor" resultMap="doctors-result03">
+        select d.doid doid,d.doname doname,
+        d.monam areg1,d.tueam areg2,d.wedam areg3,d.thuam areg4,d.friam areg5,d.satam areg6,d.sunam areg7,
+         d.monpm preg1,d.tuepm preg2,d.wedpm preg3,d.thupm preg4,d.fripm preg5,d.satpm preg6,d.sumpm preg7
+          from doctors d  JOIN  (select doid from bookable where YEARWEEK(bdate,1) = YEARWEEK(#{date},1)) de
+            on  d.doid = de.doid  where d.deid = #{deid}
+    </select>-->
+    <select id="bookabledepartdoctor" resultMap="doctors-result03">
+        select d.doid doid,d.doname doname,
+        d.monam areg1,d.tueam areg2,d.wedam areg3,d.thuam areg4,d.friam areg5,d.satam areg6,d.sunam areg7,
+        d.monpm preg1,d.tuepm preg2,d.wedpm preg3,d.thupm preg4,d.fripm preg5,d.satpm preg6,d.sumpm preg7
+        from doctors d  where d.deid = #{deid}
+    </select>
+
 </mapper>

@@ -6,6 +6,7 @@ import com.yy.hospital.Service.AdminsService;
 import com.yy.hospital.Service.DoctorsService;
 import com.yy.hospital.domain.Doctors;
 import com.yy.hospital.domain.DrAndAdmins;
+import com.yy.hospital.domain.WeekBean;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
@@ -15,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,4 +86,5 @@ public class DoctorsController {
         map.put("result",result);
         return  new ResponseEntity<Map<String,Integer>>(map,HttpStatus.OK);
     }
+
 }

@@ -1,10 +1,12 @@
 package com.yy.hospital.Service;
 
+
 import com.yy.hospital.domain.Doctors;
 import com.yy.hospital.domain.DrAndAdmins;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
+import com.yy.hospital.domain.WeekBean;
 
+
+import java.sql.Date;
 import java.util.List;
 
 public interface DoctorsService {
@@ -13,6 +15,8 @@ public interface DoctorsService {
 
     //获取所有医生列表
     List<Doctors> findAllDr();
+
+
 
     //更改医生doexist
     int updateDrDoexist(Integer doexist,Integer doid);
@@ -34,4 +38,6 @@ public interface DoctorsService {
 
     //根据id更改医生信息
     int updateDrById(Doctors doctors);
+
+
 }
