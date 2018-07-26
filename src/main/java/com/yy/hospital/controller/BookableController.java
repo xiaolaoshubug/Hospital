@@ -165,7 +165,7 @@ public class BookableController {
         for(int n = 0 ; n< list.size() ; n++){
             //used的默认值应该为0
             int result = bookableService.insertNewBookable(list.get(n).getDoid(),list.get(n).getBdate(),list.get(n).getStarttime(),
-                                                0,list.get(n).getBnum(),list.get(n).getXcum());
+                                                1,list.get(n).getBnum(),list.get(n).getXcum());
 
         }
         return  new ResponseEntity<String>("ok" , HttpStatus.OK);

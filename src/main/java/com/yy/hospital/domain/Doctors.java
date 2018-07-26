@@ -31,6 +31,7 @@ public class Doctors {
     private Departs departs;
     private String aname;
 
+
     public Integer getDeid() {
         return deid;
     }

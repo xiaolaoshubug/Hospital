@@ -4,10 +4,7 @@ import com.yy.hospital.domain.Admins;
 import com.yy.hospital.domain.Bookable;
 import com.yy.hospital.domain.Departs;
 import com.yy.hospital.domain.Doctors;
-import com.yy.hospital.mapper.AdminsMapper;
-import com.yy.hospital.mapper.BookableMapper;
-import com.yy.hospital.mapper.DepartsMapper;
-import com.yy.hospital.mapper.DoctorsMapper;
+import com.yy.hospital.mapper.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,8 @@ public class CacheTest {
     private DoctorsMapper doctorsMapper;
     @Autowired
     private BookableMapper bookableMapper;
+    @Autowired
+    private CardsMapper cardsMapper;
 
 /*    @Test
     public void test1(){
@@ -53,8 +52,6 @@ public class CacheTest {
         System.out.println("第一次查");
         List<Admins> list2 = adminsMapper.findByState(1);
         System.out.println("第二次查");*/
-        Date date = new Date(System.currentTimeMillis());
-    //               bookableMapper.insertNewBookable(55,date,5,5,5,5);
-        System.out.println(bookableMapper.findLastBookable(date,1).size()+"yyyyyyyyyyyyyyyyyyyyyyyyy");
+        cardsMapper.updateDoexist(0,1);
     }
 }
