@@ -11,4 +11,7 @@ public interface RegistrationService {
     int getMonth(Integer deid);
 
     int getQuarter(Integer deid);
+
+    //新建一个挂号
+    int insertNewRegst(Integer cid,Integer bid ,Integer snum,Integer state);
 }

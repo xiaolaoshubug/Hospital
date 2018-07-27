@@ -1,3 +1,7 @@
 表bookable中的ynum和xcyum可以允许为空
 办卡业务没有密码输入，而且办卡业务不应该在后台管理系统中进行，应该是外部进行
 更改诊疗卡状态是弹框不收回去
+现场挂号是人数的比对不应该用preg和xreg来表示，而是用bookablez中的xcum(现场可挂号数量),xcyum(现场已挂号数量)
+patient表感觉没什么用
+data: JSON.stringify(getFormData($(form)))这种ajax请求是不是只能重新封装一个pojo
+viewticket.html中的    $("#bid").val(formData.bid)；<input type="hidden" class="input-text" placeholder="" id="doname" name="doname">应该改成doname

@@ -29,6 +29,8 @@ public class CacheTest {
     private BookableMapper bookableMapper;
     @Autowired
     private CardsMapper cardsMapper;
+    @Autowired
+    private RegistrationMapper  registrationMapper;
 
 /*    @Test
     public void test1(){
@@ -52,6 +54,8 @@ public class CacheTest {
         System.out.println("第一次查");
         List<Admins> list2 = adminsMapper.findByState(1);
         System.out.println("第二次查");*/
-        cardsMapper.updateDoexist(0,1);
+//        cardsMapper.updateDoexist(0,1);
+
+        ;System.out.println(bookableMapper.findByBid(76));
     }
 }

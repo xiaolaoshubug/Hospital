@@ -28,4 +28,24 @@ public class BookableServiceImpl implements BookableService{
     public int insertNewBookable(Integer doid, Date bdate, Integer starttime, Integer used, Integer bnum, Integer xcum) {
         return bookableMapper.insertNewBookable(doid,bdate,starttime,used,bnum,xcum);
     }
+
+    @Override
+    public Bookable findXcumXycum(Integer doid , Date bdate) {
+        return bookableMapper.findXcumXycum(doid,bdate);
+    }
+
+    @Override
+    public Integer findBid(Integer doid, Date bdate) {
+        return bookableMapper.findBid(doid,bdate);
+    }
+
+    @Override
+    public int updateXcyum(Integer xcyum,Integer bid) {
+        return bookableMapper.updateXcyum(xcyum,bid);
+    }
+
+    @Override
+    public Bookable findByBid(Integer bid) {
+        return bookableMapper.findByBid(bid);
+    }
 }

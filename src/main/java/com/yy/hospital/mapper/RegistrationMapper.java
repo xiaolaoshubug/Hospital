@@ -1,8 +1,10 @@
 package com.yy.hospital.mapper;
 
 import org.apache.ibatis.annotations.CacheNamespace;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 
 import java.io.Serializable;
 
@@ -50,4 +52,9 @@ public interface RegistrationMapper  {
             "  JOIN departs de on d.deid=de.deid" +
             "  WHERE de.deid=#{deid} and QUARTER(bdate)=QUARTER(now())")
     int getQuarter(@Param("deid")Integer deid);
+
+
+    //新建一个挂号
+    @Insert("insert into registration set cid = #{cid} , bid = #{bid} ,snum = #{snum} , state = #{state}")
+    int insertNewRegst(@Param("cid")Integer cid, @Param("bid")Integer bid , @Param("snum")Integer snum,@Param("state")Integer state);
 }

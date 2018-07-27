@@ -28,9 +28,18 @@ public class Doctors {
     private Integer by1;
     private Integer by2;
 
+    private String dename;
     private Departs departs;
     private String aname;
 
+
+    public String getDename() {
+        return dename;
+    }
+
+    public void setDename(String dename) {
+        this.dename = dename;
+    }
 
     public Integer getDeid() {
         return deid;

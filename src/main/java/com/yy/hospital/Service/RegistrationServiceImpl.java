@@ -39,4 +39,9 @@ public class RegistrationServiceImpl implements RegistrationService{
     public int getQuarter(Integer deid) {
         return registrationMapper.getQuarter(deid);
     }
+
+    @Override
+    public int insertNewRegst(Integer cid, Integer bid, Integer snum, Integer state) {
+        return registrationMapper.insertNewRegst(cid,bid,snum,state);
+    }
 }

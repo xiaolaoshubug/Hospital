@@ -34,4 +34,14 @@ public class CardsServiceImpl implements CardsService {
     public int updateRamaining(Double money, Integer cid) {
         return cardsMapper.updateRamaining(money,cid);
     }
+
+    @Override
+    public Cards selectByIdcard(String idcard) {
+        return cardsMapper.selectByIdcard(idcard);
+    }
+
+    @Override
+    public int cutRamaining(Double money, String idcard) {
+        return cardsMapper.cutRamaining(money,idcard);
+    }
 }

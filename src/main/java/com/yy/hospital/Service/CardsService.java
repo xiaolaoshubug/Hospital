@@ -20,4 +20,10 @@ public interface CardsService {
     //充值
     int updateRamaining(Double money,Integer cid);
 
+    //判断诊疗卡是否正确
+    Cards selectByIdcard(String idcard);
+
+    //扣费
+    int cutRamaining(Double money,String idcard);
+
 }

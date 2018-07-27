@@ -2,6 +2,7 @@ package com.yy.hospital.Service;
 
 
 import com.yy.hospital.domain.Doctors;
+import com.yy.hospital.domain.DoctorsInfo;
 import com.yy.hospital.domain.DrAndAdmins;
 import com.yy.hospital.domain.WeekBean;
 
@@ -39,5 +40,18 @@ public interface DoctorsService {
     //根据id更改医生信息
     int updateDrById(Doctors doctors);
 
+    //根据id查询
+    List<Doctors> findDrByDeid(Integer deid);
+
+
+    //根据died和bdate查医生
+     List<Doctors> findDrByDeidBdate(Integer deid,Date bdate);
+
+
+    //根据died,doid和bdate查医生
+    DoctorsInfo findDrByDeidBdateDoid(Date bdate , Integer doid);
+
+
+    Integer findDoid(String doname);
 
 }

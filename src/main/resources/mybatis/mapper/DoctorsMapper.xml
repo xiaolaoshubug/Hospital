@@ -18,6 +18,7 @@
         <result property="info" column="INFO"/>
         <result property="doexist" column="DOEXIST"/>
         <result property="aname" column="ANAME"/>
+        <result property="dename" column="DENAME"/>
         <collection property="departs" ofType="com.yy.hospital.domain.Departs">
             <id property="dename" column="DENAME" />
         </collection>
@@ -72,6 +73,7 @@
     <resultMap id="doctors-result02" type="com.yy.hospital.domain.DrAndAdmins">
         <id property="doname" column="DONAME"></id>
         <result property="title" column="TITLE"/>
+        <result property="deid" column="DEID"/>
         <result property="dename" column="DENAME"/>
         <result property="bcost" column="BCOST"/>
         <result property="pcreg" column="PCREG"/>
@@ -96,7 +98,7 @@
     
     <select id="findOneDrAndPt" resultMap="doctors-result02" >
         select d.doname doname,d.bcost bcost,d.pcreg pcreg,d.xcreg xcreg,
-                d.title title ,de.dename dename,d.info info,
+                d.title title ,de.dename dename,d.info info,d.deid deid,
                 d.monam monam,d.tueam tueam,d.wedam wedam,d.thuam thuam,d.friam friam,d.satam satam,d.sunam sunam,
                 d.monpm monpm,d.tuepm tuepm,d.wedpm wedpm,d.thupm thupm,d.fripm fripm,d.satpm satpm,d.sumpm sumpm
                 from doctors d JOIN  departs de on d.deid = de.deid
@@ -136,6 +138,33 @@
         d.monam areg1,d.tueam areg2,d.wedam areg3,d.thuam areg4,d.friam areg5,d.satam areg6,d.sunam areg7,
         d.monpm preg1,d.tuepm preg2,d.wedpm preg3,d.thupm preg4,d.fripm preg5,d.satpm preg6,d.sumpm preg7
         from doctors d  where d.deid = #{deid}
+    </select>
+
+
+    <select id="findDrByDeidBdate" resultMap="doctors-result">
+        select d.doid doid,d.doname doname,b.xcum pcreg ,b.xcyum xcreg ,d.title
+        from doctors d join bookable b on d.doid = b.doid where b.bdate = #{bdate} and d.deid = #{deid}
+    </select>
+
+
+
+    <resultMap id="doctors-result04" type="com.yy.hospital.domain.DoctorsInfo">
+        <id property="doid" column="DOID"/>
+        <result property="doname" column="DONAME"/>
+        <result property="title" column="TITLE"/>
+        <result property="bcost" column="BCOST"/>
+        <result property="dename" column="DENAME"/>
+        <result property="xcum" column="XCUM"/>
+        <result property="xcyum" column="XCYUM"/>
+        <result property="idcard" column="IDCARD"/>
+    </resultMap>
+
+
+    <select id="findDrByDeidBdateDoid" resultMap="doctors-result04">
+        select d.doid doid,d.doname doname,d.title title, d.bcost bcost ,de.dename dename ,
+         b.xcum xcum ,b.xcyum xcyum
+        from doctors d join bookable b on d.doid = b.doid join departs de on d.deid = de.deid
+         where b.bdate = #{bdate} and b.doid = #{doid}
     </select>
 
 </mapper>

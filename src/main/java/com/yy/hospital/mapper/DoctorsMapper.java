@@ -2,6 +2,7 @@ package com.yy.hospital.mapper;
 
 
 import com.yy.hospital.domain.Doctors;
+import com.yy.hospital.domain.DoctorsInfo;
 import com.yy.hospital.domain.DrAndAdmins;
 import com.yy.hospital.domain.WeekBean;
 import org.apache.ibatis.annotations.CacheNamespace;
@@ -15,6 +16,7 @@ import java.util.List;
 
 /*@CacheNamespace(implementation = com.yy.hospital.util.RedisCache.class)*/
 public interface DoctorsMapper {
+
     @Select("select * from doctors where doid=#{doid}")
     Doctors findByDoid(@Param("doid")int doid);
 
@@ -58,11 +60,20 @@ public interface DoctorsMapper {
                      @Param("doid")Integer doid);
 
 
+    //根据died查医生
+    @Select("select * from doctors where deid = #{deid}")
+    public List<Doctors> findDrByDeid(@Param("deid")Integer deid);
+
+    //根据died和bdate查医生
+    public List<Doctors> findDrByDeidBdate(@Param("deid")Integer deid,@Param("bdate")Date bdate);
+
+    //根据doname查 doid
+    @Select("select doid from doctors where doname = #{doname}")
+    public Integer findDoid(@Param("doname")String doname);
 
 
-
-
-
+    //根据died,doid和bdate查医生
+    public DoctorsInfo findDrByDeidBdateDoid(@Param("bdate")Date bdate, @Param("doid")Integer doid);
 }
 
 
