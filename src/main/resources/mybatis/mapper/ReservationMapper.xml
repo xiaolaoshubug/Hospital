@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yy.hospital.mapper.ReservationMapper">
+
+    <!--<cache type="com.yy.hospital.util.RedisCache"/>-->
+
+
+    <resultMap id="reservation-result01" type="com.yy.hospital.domain.ReserPatienBook">
+            <id property="red" column="red"/>
+            <result property="pname" column="pname"/>
+            <result property="phone" column="phone"/>
+            <result property="dename" column="dename"/>
+            <result property="doname" column="doname"/>
+            <result property="bcost" column="bcost"/>
+            <result property="bdate" column="bdate"/>
+            <result property="medcard" column="medcard"/>
+
+    </resultMap>
+
+
+
+    <select id="findReservation" resultMap="reservation-result01">
+
+               select r.red red, p.pname pname, p.phone phone,d.doname doname,de.dename,
+                b.bdate bdate, d.bcost bcost,p.medcard medcard
+               from reservation r join patients p on r.pid = p.pid
+               join bookable b on r.bid=b.bid join doctors d on d.doid = b.doid
+               join departs de on de.deid = d.deid
+               where  p.idcard = #{idcard} and  to_days(b.bdate) >= to_days(now())
+               and r.state = 0
+    </select>
+
+
+    <resultMap id="reservation-result02" type="com.yy.hospital.domain.DoctorsInfo">
+        <id property="doid" column="DOID"/>
+        <result property="doname" column="DONAME"/>
+        <result property="title" column="TITLE"/>
+        <result property="bcost" column="BCOST"/>
+        <result property="dename" column="DENAME"/>
+        <result property="xcum" column="XCUM"/>
+        <result property="xcyum" column="XCYUM"/>
+        <result property="idcard" column="IDCARD"/>
+        <result property="pname" column="PNAME"/>
+        <result property="deid" column="DEID"/>
+        <result property="medcard" column="MEDCARD"/>
+
+    </resultMap>
+
+    <select id="findAllGram" resultMap="reservation-result02">
+        select  d.doname , de.dename , d.bcost  ,de.dename , p.pname ,c.cid medcard, de.deid
+        from doctors d
+        JOIN  departs de  on d.deid = de.deid
+        join  bookable b   on  b.doid = d.doid
+        join reservation r on r.bid = b.bid
+        join patients p on p.pid = r.pid
+        join cards c on c.pname = p.pname
+        where red = #{red}
+    </select>
+</mapper>

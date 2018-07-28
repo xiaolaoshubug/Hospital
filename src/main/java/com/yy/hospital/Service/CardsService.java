@@ -21,9 +21,9 @@ public interface CardsService {
     int updateRamaining(Double money,Integer cid);
 
     //判断诊疗卡是否正确
-    Cards selectByIdcard(String idcard);
+    Cards selectByIdcard(Integer idcard);
 
     //扣费
-    int cutRamaining(Double money,String idcard);
+    int cutRamaining(Double money,Integer medcard);
 
 }

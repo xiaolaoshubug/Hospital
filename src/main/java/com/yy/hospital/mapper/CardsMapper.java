@@ -31,10 +31,13 @@ public interface CardsMapper {
 
 
     //扣费
-    @Update("update cards set ramaining= ramaining - #{money}  where idcard = #{idcard}")
-    public int cutRamaining(@Param("money")Double money,@Param("idcard")String idcard);
+    @Update("update cards set ramaining= ramaining - #{money}  where cid = #{medcard}")
+    public int cutRamaining(@Param("money")Double money,@Param("medcard")Integer medcard);
 
     //判断诊疗卡号是否正确
-    @Select("select cid,pname,gender,phone,idcard,pwd,ramaining,newdate,doexist from cards where idcard = #{idcard}")
-    public Cards selectByIdcard(@Param("idcard")String idcard);
+    @Select("select cid,pname,gender,phone,idcard,pwd,ramaining,newdate,doexist from cards where cid = #{idcard}")
+    public Cards selectByIdcard(@Param("idcard")Integer idcard);
+
+
+
 }

@@ -5,3 +5,4 @@
 patient表感觉没什么用
 data: JSON.stringify(getFormData($(form)))这种ajax请求是不是只能重新封装一个pojo
 viewticket.html中的    $("#bid").val(formData.bid)；<input type="hidden" class="input-text" placeholder="" id="doname" name="doname">应该改成doname
+service层的意义

@@ -6,14 +6,15 @@ public class RegistrationInfo {
     private String doname; //医生
     private String dename; //科室
     private Integer bcost; //挂号费
-    private String medcard; //诊疗卡
+    private Integer medcard; //诊疗卡
     private Integer starttime; //1为诊疗卡，0为现金
+    private Integer red;
 
 
     public RegistrationInfo() {
     }
 
-    public RegistrationInfo(Integer snum, String pname, String doname, String dename, Integer bcost, String medcard, Integer starttime) {
+    public RegistrationInfo(Integer snum, String pname, String doname, String dename, Integer bcost, Integer medcard, Integer starttime, Integer red) {
         this.snum = snum;
         this.pname = pname;
         this.doname = doname;
@@ -21,6 +22,15 @@ public class RegistrationInfo {
         this.bcost = bcost;
         this.medcard = medcard;
         this.starttime = starttime;
+        this.red = red;
+    }
+
+    public Integer getRed() {
+        return red;
+    }
+
+    public void setRed(Integer red) {
+        this.red = red;
     }
 
     public Integer getSnum() {
@@ -63,11 +73,11 @@ public class RegistrationInfo {
         this.bcost = bcost;
     }
 
-    public String getMedcard() {
+    public Integer getMedcard() {
         return medcard;
     }
 
-    public void setMedcard(String medcard) {
+    public void setMedcard(Integer medcard) {
         this.medcard = medcard;
     }
 
@@ -78,4 +88,5 @@ public class RegistrationInfo {
     public void setStarttime(Integer starttime) {
         this.starttime = starttime;
     }
+
 }

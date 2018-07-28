@@ -36,12 +36,12 @@ public class CardsServiceImpl implements CardsService {
     }
 
     @Override
-    public Cards selectByIdcard(String idcard) {
+    public Cards selectByIdcard(Integer idcard) {
         return cardsMapper.selectByIdcard(idcard);
     }
 
     @Override
-    public int cutRamaining(Double money, String idcard) {
-        return cardsMapper.cutRamaining(money,idcard);
+    public int cutRamaining(Double money, Integer medcard) {
+        return cardsMapper.cutRamaining(money,medcard);
     }
 }

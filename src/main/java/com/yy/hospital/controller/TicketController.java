@@ -30,7 +30,8 @@ public class TicketController {
     private CardsService cardsService;
     @Autowired
     private RegistrationService registrationService;
-
+    @Autowired
+    private ReservationService reservationService;
 
     @RequestMapping(value = "/booksbuyticket" , method = RequestMethod.GET)
     public ResponseEntity<List<AllDptAndDr>> downnetBuyTicket(){
@@ -71,9 +72,7 @@ public class TicketController {
             result = 1;
         }
         //生成票号(获取今天该科室的挂号人数)
-        System.out.println("-1-1-1-1-1-1-1-1-1    "+doctorsService.findOneDrAndPt(doctorsInfo.getDoid()).getDeid());  //test
         Integer snum = (int)(registrationService.getToday(doctorsService.findOneDrAndPt(doctorsInfo.getDoid()).getDeid()))+1;
-        System.out.println("0000000000-------"+snum);   //test
         Map<String,Object> map = new HashMap<>();
         map.put("result",result);
         map.put("snum",snum);
@@ -98,8 +97,9 @@ public class TicketController {
         }
         //生成一个挂号单
         //诊疗卡id--cid
-        Integer cid = cardsService.selectByIdcard(registrationInfo.getMedcard()).getCid();
+        Integer cid = registrationInfo.getMedcard();/*cardsService.selectByIdcard(registrationInfo.getMedcard()).getCid();*/
         //排班表id--bid
+
         Integer doid = doctorsService.findDoid(registrationInfo.getDoname());
         Integer bid = bookableService.findBid(doid,new Date(System.currentTimeMillis()));
         //票号
@@ -108,6 +108,11 @@ public class TicketController {
         //是否已就诊
         Integer state = 0;
         int result = registrationService.insertNewRegst(cid,bid,snum,state);
+
+        //如果是取预约号的，就需要更新预约号的state
+
+        reservationService.updateState(registrationInfo.getRed());
+
 
         //更新医生今天的已经就诊人数（bookable）
         Integer xcyum = bookableService.findByBid(bid).getXcyum();

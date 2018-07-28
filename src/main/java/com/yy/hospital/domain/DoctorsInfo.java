@@ -8,12 +8,16 @@ public class DoctorsInfo {
     private Integer xcum;
     private Integer xcyum;
     private Double bcost;
-    private String medcard;
+    private Integer medcard;
+    private Integer deid;
+    private String pname;
+    private Integer snum;
+
 
     public DoctorsInfo() {
     }
 
-    public DoctorsInfo(Integer doid, String doname, String dename, String title, Integer xcum, Integer xcyum, Double bcost, String medcard) {
+    public DoctorsInfo(Integer doid, String doname, String dename, String title, Integer xcum, Integer xcyum, Double bcost, Integer medcard, Integer deid, String pname, Integer snum) {
         this.doid = doid;
         this.doname = doname;
         this.dename = dename;
@@ -21,6 +25,13 @@ public class DoctorsInfo {
         this.xcum = xcum;
         this.xcyum = xcyum;
         this.bcost = bcost;
+        this.medcard = medcard;
+        this.deid = deid;
+        this.pname = pname;
+        this.snum = snum;
+    }
+
+    public void setMedcard(Integer medcard) {
         this.medcard = medcard;
     }
 
@@ -32,6 +43,10 @@ public class DoctorsInfo {
         this.xcum = xcum;
         this.xcyum = xcyum;
 
+    }
+
+    public Integer getMedcard() {
+        return medcard;
     }
 
     public Integer getDoid() {
@@ -90,11 +105,27 @@ public class DoctorsInfo {
         this.bcost = bcost;
     }
 
-    public String getMedcard() {
-        return medcard;
+    public Integer getDeid() {
+        return deid;
     }
 
-    public void setMedcard(String medcard) {
-        this.medcard = medcard;
+    public void setDeid(Integer deid) {
+        this.deid = deid;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public Integer getSnum() {
+        return snum;
+    }
+
+    public void setSnum(Integer snum) {
+        this.snum = snum;
     }
 }
